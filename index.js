@@ -32,9 +32,44 @@ app.get('/users', async (req, res) => {
 
 //Get User by ID
 app.get('/users/:id', async (req, res) => {
+  try{
   const user = await User.findById(req.params.id);
+  if(!user) {
+    return res.status(404).send({ message: 'User not found' });
+  }
   res.send(user);
+  }
+  catch(err) {
+    res.status(500).send({ message: err.message });
+  }
 });
+
+//Update User
+app.put('/users/:id', async (req, res)=>{
+  try {
+    const user = await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
+    if(!user) {
+      return res.status(404).send({message: 'User not found' });
+    }
+    res.send(user);
+  } catch (error) {
+    res.status(500).send({ message: err.message});
+  }
+});
+
+//Deleting a User
+app.delete('/users/:id', async (req, res) => {
+  try {
+    const user = await User.findByIdAndDelete(req.params.id);
+    if(!user) {
+      return res.status(404).send({message: "User not found"});
+    }
+    res.send({message: 'User deleted Successfully'});
+  }
+  catch(err){
+    res.status(500).send({message: err.message});
+  }
+})
 
 let PORT = process.env.PORT ?? 3000;
 // Server

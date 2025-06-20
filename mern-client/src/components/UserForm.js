@@ -16,7 +16,7 @@ function UserForm({ onAdd }) {
 return (
     <form onSubmit={handleSubmit}>
         <input value={ name } onChange={(e) => setName(e.target.value)} placeholder="Name" required />
-        <input value={ age } onChange={(e) => setName(e.target.value)} placeholder="Age" type="number" required />
+        <input value={ age } onChange={(e) => setAge(e.target.value)} placeholder="Age" type="number" required />
         <button type="submit">Add User</button>
     </form>
 );

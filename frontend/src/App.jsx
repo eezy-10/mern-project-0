@@ -25,7 +25,6 @@ function App() {
     axios.post('http://localhost:3000/api/users/', user)
     .then(res => setUsers([...users, res.data]))
     .catch(err => console.log(err));
-    setUsers([...users, user]);
   };
   const center = {
     textAlign: 'center',
